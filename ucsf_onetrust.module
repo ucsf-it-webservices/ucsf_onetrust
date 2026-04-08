@@ -1,0 +1,63 @@
+<?php
+
+/**
+ * @file
+ * Hook implementations for ucsf_onetrust module.
+ */
+
+/**
+ * Implements hook_page_attachments().
+ */
+function ucsf_onetrust_page_attachments(array &$attachments) {
+ 
+    if (\Drupal::service('router.admin_context')->isAdminRoute()) {
+      return;
+    }
+   
+    if (isset($_ENV['AH_PRODUCTION']) && $_ENV['AH_PRODUCTION']) {
+      return;
+    }
+ 
+    $attachments['#attached']['library'][] = 'ucsf_onetrust/ucsf_onetrust';
+
+    $attachments['#attached']['html_head'][] = [
+      [
+        '#type' => 'html_tag',
+        '#tag' => 'script',
+        '#attributes' => ['src' => 'https://cdn.cookielaw.org/consent/0196f35b-b385-7785-873e-13cec2bffcb5-test/OtAutoBlock.js'],
+      ],
+      'OtAutoBlock',
+    ];
+    $attachments['#attached']['html_head'][] = [
+      [
+        '#type' => 'html_tag',
+        '#tag' => 'script',
+        '#attributes' => [
+          'src' => 'https://cdn.cookielaw.org/scripttemplates/otSDKStub.js',
+          'charset' => 'UTF-8',
+          'data-domain-script' => '0196f35b-b385-7785-873e-13cec2bffcb5-test'
+        ],
+      ],
+      'otSDKStub',
+    ];
+    $attachments['#attached']['html_head'][] = [
+      [
+        '#type' => 'html_tag',
+        '#tag' => 'script',
+        '#value' => 'function OptanonWrapper() {
+          // Check if banner div is available
+          if (document.getElementById("onetrust-banner-sdk")) {
+            // Get the buttons and container
+            var acceptBtn = document.getElementById("onetrust-accept-btn-handler");
+            var declineBtn = document.getElementById("onetrust-reject-all-handler");
+            var cookieSettingsBtn = document.getElementById("onetrust-pc-btn-handler");
+            var btnContainer = document.getElementById("onetrust-button-group");
+            
+            btnContainer.append(acceptBtn, cookieSettingsBtn, declineBtn);
+          }
+        }',
+      ],
+      'OptanonWrapper',
+    ];
+
+}

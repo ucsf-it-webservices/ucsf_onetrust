@@ -1,0 +1,7 @@
+ucsf_onetrust:
+  header: false
+  js:
+    js/onetrust.js: { attributes: { defer: false } }
+  dependencies:
+    - core/jquery
+    - theme/ucsf
