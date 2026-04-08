@@ -1,0 +1,14 @@
+{
+  "name": "ucsf/ucsf_onetrust",
+  "type": "drupal-module",
+  "description": "Module provides OneTrust prompts for websites, managing cookie governance.",
+  "keywords": ["Drupal"],
+  "license": "MIT",
+  "homepage": "https://github.com/ucsf-it-webservices/ucsf_onetrust",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://github.com/ucsf-it-webservices/ucsf_onetrust",
+    "source": "https://github.com/ucsf-it-webservices/ucsf_onetrust"
+  },
+  "require": { }
+}
