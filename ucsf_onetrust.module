@@ -11,12 +11,9 @@
 function ucsf_onetrust_page_attachments(array &$attachments) {
  
     if (\Drupal::service('router.admin_context')->isAdminRoute()) {
-      return;
+      //return;
     }
    
-    if (isset($_ENV['AH_PRODUCTION']) && $_ENV['AH_PRODUCTION']) {
-      return;
-    }
  
     $attachments['#attached']['library'][] = 'ucsf_onetrust/ucsf_onetrust';
 
