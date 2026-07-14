@@ -11,17 +11,18 @@
 function ucsf_onetrust_page_attachments(array &$attachments) {
  
     if (\Drupal::service('router.admin_context')->isAdminRoute()) {
-      //return;
+      return;
     }
    
- 
+
+
     $attachments['#attached']['library'][] = 'ucsf_onetrust/ucsf_onetrust';
 
     $attachments['#attached']['html_head'][] = [
       [
         '#type' => 'html_tag',
         '#tag' => 'script',
-        '#attributes' => ['src' => 'https://cdn.cookielaw.org/consent/0196f35b-b385-7785-873e-13cec2bffcb5-test/OtAutoBlock.js'],
+        '#attributes' => ['src' => 'https://cdn.cookielaw.org/consent/69de606f-159b-41ad-82da-d7a76950873b-test/OtAutoBlock.js'],
       ],
       'OtAutoBlock',
     ];
@@ -32,7 +33,7 @@ function ucsf_onetrust_page_attachments(array &$attachments) {
         '#attributes' => [
           'src' => 'https://cdn.cookielaw.org/scripttemplates/otSDKStub.js',
           'charset' => 'UTF-8',
-          'data-domain-script' => '0196f35b-b385-7785-873e-13cec2bffcb5-test'
+          'data-domain-script' => '69de606f-159b-41ad-82da-d7a76950873b-test'
         ],
       ],
       'otSDKStub',
