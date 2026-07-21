@@ -13,7 +13,14 @@ function ucsf_onetrust_page_attachments(array &$attachments) {
     if (\Drupal::service('router.admin_context')->isAdminRoute()) {
       return;
     }
-   
+    //  $_ENV['PANTHEON_ENVIRONMENT']=='live' for pantheon support in the future
+    if (isset($_ENV['AH_PRODUCTION'])) {
+      $src = 'https://cdn.cookielaw.org/consent/69de606f-159b-41ad-82da-d7a76950873b/OtAutoBlock.js';
+      $idcode = '69de606f-159b-41ad-82da-d7a76950873b';
+    } else {
+      $src = 'https://cdn.cookielaw.org/consent/69de606f-159b-41ad-82da-d7a76950873b-test/OtAutoBlock.js';
+      $idcode = '69de606f-159b-41ad-82da-d7a76950873b-test';
+    }
 
 
     $attachments['#attached']['library'][] = 'ucsf_onetrust/ucsf_onetrust';
@@ -22,10 +29,11 @@ function ucsf_onetrust_page_attachments(array &$attachments) {
       [
         '#type' => 'html_tag',
         '#tag' => 'script',
-        '#attributes' => ['src' => 'https://cdn.cookielaw.org/consent/69de606f-159b-41ad-82da-d7a76950873b-test/OtAutoBlock.js'],
+        '#attributes' => ['src' => $src],
       ],
       'OtAutoBlock',
     ];
+
     $attachments['#attached']['html_head'][] = [
       [
         '#type' => 'html_tag',
@@ -33,11 +41,12 @@ function ucsf_onetrust_page_attachments(array &$attachments) {
         '#attributes' => [
           'src' => 'https://cdn.cookielaw.org/scripttemplates/otSDKStub.js',
           'charset' => 'UTF-8',
-          'data-domain-script' => '69de606f-159b-41ad-82da-d7a76950873b-test'
+          'data-domain-script' => $idcode
         ],
       ],
       'otSDKStub',
     ];
+    
     $attachments['#attached']['html_head'][] = [
       [
         '#type' => 'html_tag',
